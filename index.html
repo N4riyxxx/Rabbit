@@ -23,29 +23,56 @@
             background-color: #fdf0f4;
         }
 
-        /* ----------------------------------
-           หน้า 1: หน้าแรก (Landing Page)
-        ---------------------------------- */
-        #welcome-screen {
+        /* Class สำหรับหน้าจอพื้นหลัง chung */
+        .screen-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-image: url('663.png'); 
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            /* สีสำรองกรณีไฟล์รูปภาพโหลดไม่ขึ้น */
+            background-color: #FCE4EC; 
+        }
+
+        /* ----------------------------------
+           หน้า 1: หน้าแรก (Landing Page)
+        ---------------------------------- */
+        #welcome-screen {
+            background-image: url('663.png'); /* เปลี่ยนชื่อไฟล์รูปพื้นหลังหน้าแรกตรงนี้ */
             z-index: 999;
-            display: flex; /* แสดงหน้าแรกเป็นหน้าหลัก */
+            display: flex;
+            flex-direction: column;
             justify-content: center;
+            align-items: center;
+        }
+
+        .rabbit-avatar-container {
+            width: 180px;
+            height: 180px;
+            margin-bottom: 30px;
+            border-radius: 50%;
+            border: 6px solid #FFF;
+            box-shadow: 0 8px 20px rgba(74, 21, 37, 0.15);
+            overflow: hidden;
+            background-color: #FFF;
+            animation: bounce 2s infinite ease-in-out;
+        }
+
+        .rabbit-avatar-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
         }
 
         .open-btn {
-            position: absolute;
-            bottom: 5%; 
-            left: 50%;                  
-            transform: translateX(-50%); 
             padding: 12px 48px;
             font-size: 24px;
             font-weight: 700;
@@ -61,7 +88,7 @@
         }
 
         .open-btn:hover {
-            transform: translateX(-50%) scale(1.08); 
+            transform: scale(1.08); 
             background-color: #D89EA9;
         }
 
@@ -69,17 +96,9 @@
            หน้า 2: หน้าใส่รหัสผ่าน
         ---------------------------------- */
         #password-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-image: url('363.png'); 
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            background-image: url('363.png'); /* เปลี่ยนชื่อไฟล์รูปพื้นหลังหน้า 2 ตรงนี้ */
             z-index: 888;
-            display: none; /* ซ่อนไว้ก่อน */
+            display: none;
             flex-direction: column;
             justify-content: center;
             align-items: center;
@@ -88,7 +107,7 @@
         .password-display-box {
             width: 320px;
             height: 54px;
-            background-color: rgba(255, 255, 255, 0.85);
+            background-color: rgba(255, 255, 255, 0.9);
             border: 3px solid #4A1525;
             border-radius: 30px;
             display: flex;
@@ -179,17 +198,9 @@
            หน้า 3: หน้าแสดงคำอวยพร
         ---------------------------------- */
         #greeting-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-image: url('363.png'); 
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            background-image: url('363.png');
             z-index: 777;
-            display: none; /* ซ่อนไว้ก่อน */
+            display: none;
             justify-content: center;
             align-items: center;
             padding: 20px;
@@ -198,13 +209,13 @@
         .anniversary-card {
             width: 100%;
             max-width: 650px;
-            background-color: rgba(228, 203, 206, 0.92);
-            border-radius: 12px;
+            background-color: rgba(228, 203, 206, 0.95);
+            border-radius: 16px;
             box-shadow: 0 10px 30px rgba(74, 21, 37, 0.15);
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            backdrop-filter: blur(3px);
+            backdrop-filter: blur(5px);
         }
 
         .card-header {
@@ -262,17 +273,9 @@
            หน้า 4: หน้าฟังเพลง
         ---------------------------------- */
         #music-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-image: url('363.png'); 
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            background-image: url('363.png');
             z-index: 666;
-            display: none; /* ซ่อนไว้ก่อน */
+            display: none;
             justify-content: center;
             align-items: center;
         }
@@ -436,12 +439,16 @@
 <body>
 
     <!-- 1. หน้าแรก -->
-    <div id="welcome-screen">
+    <div id="welcome-screen" class="screen-bg">
+        <!-- กรอบแสดงรูปกระต่าย/ตัวละครหน้าแรก -->
+        <div class="rabbit-avatar-container">
+            <img src="rabbit.png" alt="Rabbit" id="rabbitImg">
+        </div>
         <button class="open-btn" onclick="showScreen('password-screen')">OPEN</button>
     </div>
 
     <!-- 2. หน้าใส่รหัสผ่าน -->
-    <div id="password-screen">
+    <div id="password-screen" class="screen-bg">
         <div class="password-display-box" id="passwordBox">
             <div class="password-text-area" id="passDisplay">
                 Enter Our Password
@@ -468,7 +475,7 @@
     </div>
 
     <!-- 3. หน้าแสดงคำอวยพร -->
-    <div id="greeting-screen">
+    <div id="greeting-screen" class="screen-bg">
         <div class="anniversary-card">
             <div class="card-header">
                 <button class="nav-btn" onclick="showScreen('password-screen')">←</button>
@@ -486,7 +493,7 @@
     </div>
 
     <!-- 4. หน้าฟังเพลง -->
-    <div id="music-screen">
+    <div id="music-screen" class="screen-bg">
         <div class="player-container">
             <!-- แผ่นเสียง -->
             <div class="vinyl-record" id="vinyl">
@@ -527,7 +534,7 @@
 
         <!-- แท็กเพลง HTML Audio -->
         <audio id="myAudio" loop>
-            <source src=" ลิงก์เพลง " type="audio/mpeg">
+            <source src="music.mp3" type="audio/mpeg">
         </audio>
     </div>
 
@@ -537,7 +544,7 @@
         const audio = document.getElementById('myAudio');
         const vinyl = document.getElementById('vinyl');
 
-        // ฟังก์ชันจัดการสลับหน้าจออย่างสมบูรณ์ ไม่ให้ซ้อนกัน
+        // สลับแสดงหน้าจอ
         function showScreen(screenId) {
             const screens = ['welcome-screen', 'password-screen', 'greeting-screen', 'music-screen'];
             screens.forEach(id => {
