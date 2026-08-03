@@ -37,8 +37,7 @@
             background-position: center;
             background-repeat: no-repeat;
             z-index: 999;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
-            display: flex;
+            display: flex; /* แสดงหน้าแรกเป็นหน้าหลัก */
             justify-content: center;
         }
 
@@ -67,7 +66,7 @@
         }
 
         /* ----------------------------------
-           หน้า 2: หน้าใส่รหัสผ่าน (ใช้พื้นหลัง 363.png)
+           หน้า 2: หน้าใส่รหัสผ่าน
         ---------------------------------- */
         #password-screen {
             position: fixed;
@@ -80,11 +79,10 @@
             background-position: center;
             background-repeat: no-repeat;
             z-index: 888;
-            display: flex;
+            display: none; /* ซ่อนไว้ก่อน */
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
         }
 
         .password-display-box {
@@ -178,7 +176,7 @@
         }
 
         /* ----------------------------------
-           หน้า 3: หน้าแสดงคำอวยพร (ใช้พื้นหลัง 363.png)
+           หน้า 3: หน้าแสดงคำอวยพร
         ---------------------------------- */
         #greeting-screen {
             position: fixed;
@@ -191,11 +189,10 @@
             background-position: center;
             background-repeat: no-repeat;
             z-index: 777;
-            display: flex;
+            display: none; /* ซ่อนไว้ก่อน */
             justify-content: center;
             align-items: center;
             padding: 20px;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
         }
 
         .anniversary-card {
@@ -262,7 +259,7 @@
         }
 
         /* ----------------------------------
-           หน้า 4: หน้าฟังเพลง (ใช้พื้นหลัง 363.png)
+           หน้า 4: หน้าฟังเพลง
         ---------------------------------- */
         #music-screen {
             position: fixed;
@@ -275,32 +272,30 @@
             background-position: center;
             background-repeat: no-repeat;
             z-index: 666;
-            display: flex;
+            display: none; /* ซ่อนไว้ก่อน */
             justify-content: center;
-            align-items: center; /* จัดให้อยู่กึ่งกลางหน้าจอ */
+            align-items: center;
         }
 
-        /* คอนเทนเนอร์เครื่องเล่นเพลง */
         .player-container {
             position: relative;
-            width: 440px;
-            height: 320px;
+            width: 540px;
+            height: 400px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* แผ่นเสียง (Vinyl) */
         .vinyl-record {
             position: absolute;
             left: 0px;
             top: 50%;
             transform: translateY(-50%);
-            width: 270px;
-            height: 270px;
+            width: 340px;
+            height: 340px;
             border-radius: 50%;
             background: radial-gradient(circle, #3a2e2b 0%, #111111 25%, #2b2b2b 28%, #000000 70%);
-            box-shadow: -5px 8px 20px rgba(0, 0, 0, 0.25);
+            box-shadow: -8px 12px 25px rgba(0, 0, 0, 0.3);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -311,25 +306,24 @@
         .vinyl-record::before {
             content: '';
             position: absolute;
-            width: 250px;
-            height: 250px;
+            width: 315px;
+            height: 315px;
             border-radius: 50%;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* ฉลากแผ่นเสียง */
         .vinyl-label {
-            width: 90px;
-            height: 90px;
+            width: 110px;
+            height: 110px;
             background-color: #EFA2B4;
             border-radius: 50%;
-            border: 3px solid #fff;
+            border: 4px solid #fff;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             color: #5C2533;
-            font-size: 8px;
+            font-size: 10px;
             font-weight: 700;
             text-align: center;
             padding: 5px;
@@ -339,31 +333,29 @@
             100% { transform: translateY(-50%) rotate(360deg); }
         }
 
-        /* การ์ดเครื่องเล่นเพลง */
         .music-player-card {
             position: absolute;
             right: 0px;
             top: 50%;
             transform: translateY(-50%);
-            width: 260px;
+            width: 310px;
             background-color: #E8C3CC;
-            border-radius: 20px;
-            padding: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border-radius: 24px;
+            padding: 18px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
             z-index: 2;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* กรอบรูปคู่ */
         .photo-frame {
             width: 100%;
-            height: 190px;
-            border-radius: 12px;
+            height: 220px;
+            border-radius: 16px;
             overflow: hidden;
             background-color: #fff;
-            border: 3px solid #fff;
+            border: 4px solid #fff;
         }
 
         .photo-frame img {
@@ -372,15 +364,14 @@
             object-fit: cover;
         }
 
-        /* แถบเล่นเพลง (Progress Bar) */
         .progress-container {
             width: 100%;
-            margin-top: 12px;
+            margin-top: 15px;
         }
 
         .progress-bar-bg {
             width: 100%;
-            height: 5px;
+            height: 6px;
             background-color: #D1A3B0;
             border-radius: 10px;
             position: relative;
@@ -398,10 +389,10 @@
         .progress-bar-fill::after {
             content: '';
             position: absolute;
-            right: -4px;
-            top: -3.5px;
-            width: 12px;
-            height: 12px;
+            right: -5px;
+            top: -4px;
+            width: 14px;
+            height: 14px;
             background-color: #5C2533;
             border-radius: 50%;
         }
@@ -409,19 +400,18 @@
         .time-stamps {
             display: flex;
             justify-content: space-between;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 600;
             color: #5C2533;
-            margin-top: 4px;
+            margin-top: 6px;
         }
 
-        /* ปุ่มควบคุม */
         .controls {
             display: flex;
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            margin-top: 8px;
+            margin-top: 10px;
             padding: 0 5px;
         }
 
@@ -429,7 +419,7 @@
             background: none;
             border: none;
             color: #5C2533;
-            font-size: 16px;
+            font-size: 18px;
             cursor: pointer;
             transition: transform 0.1s ease;
         }
@@ -439,13 +429,7 @@
         }
 
         .play-pause-btn {
-            font-size: 22px;
-        }
-
-        .fade-out {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
+            font-size: 24px;
         }
     </style>
 </head>
@@ -453,7 +437,7 @@
 
     <!-- 1. หน้าแรก -->
     <div id="welcome-screen">
-        <button class="open-btn" onclick="goToPasswordPage()">OPEN</button>
+        <button class="open-btn" onclick="showScreen('password-screen')">OPEN</button>
     </div>
 
     <!-- 2. หน้าใส่รหัสผ่าน -->
@@ -487,9 +471,9 @@
     <div id="greeting-screen">
         <div class="anniversary-card">
             <div class="card-header">
-                <button class="nav-btn" onclick="backToPassword()">←</button>
+                <button class="nav-btn" onclick="showScreen('password-screen')">←</button>
                 <div class="header-title">Happy 1st Anniversary 🫶</div>
-                <button class="nav-btn" onclick="backToPassword()">✕</button>
+                <button class="nav-btn" onclick="showScreen('password-screen')">✕</button>
             </div>
 
             <div class="card-body">
@@ -504,12 +488,11 @@
     <!-- 4. หน้าฟังเพลง -->
     <div id="music-screen">
         <div class="player-container">
-            
             <!-- แผ่นเสียง -->
             <div class="vinyl-record" id="vinyl">
                 <div class="vinyl-label">
                     <span>OUR SONG</span>
-                    <span style="font-size: 6px; margin-top: 2px;">THE ART OF LOVING</span>
+                    <span style="font-size: 8px; margin-top: 3px;">THE ART OF LOVING</span>
                 </div>
             </div>
 
@@ -540,12 +523,10 @@
                     <button class="ctrl-btn">🔁</button>
                 </div>
             </div>
-
         </div>
 
         <!-- แท็กเพลง HTML Audio -->
         <audio id="myAudio" loop>
-            <!-- ลิงก์เพลง ใส่ลิงก์ MP3 ตรงนี้ -->
             <source src=" ลิงก์เพลง " type="audio/mpeg">
         </audio>
     </div>
@@ -556,8 +537,17 @@
         const audio = document.getElementById('myAudio');
         const vinyl = document.getElementById('vinyl');
 
-        function goToPasswordPage() {
-            document.getElementById('welcome-screen').classList.add('fade-out');
+        // ฟังก์ชันจัดการสลับหน้าจออย่างสมบูรณ์ ไม่ให้ซ้อนกัน
+        function showScreen(screenId) {
+            const screens = ['welcome-screen', 'password-screen', 'greeting-screen', 'music-screen'];
+            screens.forEach(id => {
+                const el = document.getElementById(id);
+                if (id === screenId) {
+                    el.style.display = 'flex';
+                } else {
+                    el.style.display = 'none';
+                }
+            });
         }
 
         function pressKey(num) {
@@ -594,7 +584,7 @@
         function checkPassword() {
             const passwordBox = document.getElementById('passwordBox');
             if (currentInput === CORRECT_PASSWORD) {
-                document.getElementById('password-screen').classList.add('fade-out');
+                showScreen('greeting-screen');
             } else {
                 passwordBox.classList.add('shake');
                 setTimeout(() => {
@@ -605,14 +595,8 @@
             }
         }
 
-        function backToPassword() {
-            currentInput = "";
-            updateDisplay();
-            document.getElementById('password-screen').classList.remove('fade-out');
-        }
-
         function goToMusicPage() {
-            document.getElementById('greeting-screen').classList.add('fade-out');
+            showScreen('music-screen');
             audio.play().catch(e => console.log("Autoplay blocked:", e));
         }
 
