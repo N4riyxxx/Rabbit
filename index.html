@@ -23,8 +23,13 @@
             background-color: #fdf0f4;
         }
 
+        /* คลาสสำหรับซ่อนหน้าเว็บแบบเด็ดขาด */
+        .screen-hidden {
+            display: none !important;
+        }
+
         /* ----------------------------------
-           หน้า 1: หน้าแรก (Landing Page)
+           หน้า 1: หน้าแรก (รูปกระต่าย + ปุ่ม OPEN)
         ---------------------------------- */
         #welcome-screen {
             position: fixed;
@@ -33,10 +38,8 @@
             width: 100vw;
             height: 100vh;
             background-color: #fdf0f4;
-            z-index: 30; /* อยู่ชั้นบนสุด */
-            transition: opacity 0.5s ease;
+            z-index: 99;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
@@ -76,11 +79,6 @@
             background-color: #D89EA9;
         }
 
-        /* Class สำหรับซ่อนหน้าแบบสมบูรณ์ ไม่ให้ปุ่มตกค้าง */
-        .hidden {
-            display: none !important;
-        }
-
         /* ----------------------------------
            หน้า 2: หน้าใส่รหัสผ่าน
         ---------------------------------- */
@@ -95,7 +93,7 @@
             background-position: center;
             background-repeat: no-repeat;
             background-color: #fdf0f4;
-            z-index: 20;
+            z-index: 88;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -225,7 +223,7 @@
             background-position: center;
             background-repeat: no-repeat;
             background-color: #fdf0f4;
-            z-index: 10;
+            z-index: 77;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -309,7 +307,7 @@
             background-position: center;
             background-repeat: no-repeat;
             background-color: #fdf0f4;
-            z-index: 5;
+            z-index: 66;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -497,14 +495,14 @@
 </head>
 <body>
 
-    <!-- 1. หน้าแรก (ภาพน้องกระต่าย) -->
+    <!-- 1. หน้าแรก (แสดงแค่ภาพกระต่ายและปุ่ม OPEN) -->
     <div id="welcome-screen">
         <img src="663.png" alt="Welcome Rabbit" class="welcome-bg-img" onerror="this.style.display='none'">
         <button class="open-btn" onclick="goToPasswordPage()">OPEN</button>
     </div>
 
     <!-- 2. หน้าใส่รหัสผ่าน -->
-    <div id="password-screen">
+    <div id="password-screen" class="screen-hidden">
         <button class="back-to-welcome-btn" onclick="backToWelcome()">← หน้าแรก</button>
 
         <div class="password-display-box" id="passwordBox">
@@ -533,7 +531,7 @@
     </div>
 
     <!-- 3. หน้าแสดงคำอวยพร -->
-    <div id="greeting-screen" class="hidden">
+    <div id="greeting-screen" class="screen-hidden">
         <div class="anniversary-card">
             <div class="card-header">
                 <button class="nav-btn" onclick="backToWelcome()">←</button>
@@ -551,7 +549,7 @@
     </div>
 
     <!-- 4. หน้าฟังเพลง -->
-    <div id="music-screen" class="hidden">
+    <div id="music-screen" class="screen-hidden">
         <div class="player-container">
             <div class="vinyl-record" id="vinyl">
                 <div class="vinyl-label">
@@ -602,19 +600,17 @@
         const durationEl = document.getElementById('duration');
         const progressBarBg = document.getElementById('progressBarBg');
 
-        /* ------------ ระบบเปลี่ยนหน้า (ซ่อน/แสดง) ------------ */
+        /* ------------ ระบบเปลี่ยนหน้า (ควบคุมการแสดง/ซ่อน) ------------ */
         function goToPasswordPage() {
-            // ซ่อนหน้าแรกแบบเด็ดขาด ปุ่ม OPEN จะหายไปเลย
-            document.getElementById('welcome-screen').classList.add('hidden');
-            document.getElementById('password-screen').classList.remove('hidden');
+            document.getElementById('welcome-screen').classList.add('screen-hidden');
+            document.getElementById('password-screen').classList.remove('screen-hidden');
         }
 
         function backToWelcome() {
-            // ดึงหน้าแรกกระต่ายกลับมา
-            document.getElementById('welcome-screen').classList.remove('hidden');
-            document.getElementById('password-screen').classList.remove('hidden');
-            document.getElementById('greeting-screen').classList.add('hidden');
-            document.getElementById('music-screen').classList.add('hidden');
+            document.getElementById('welcome-screen').classList.remove('screen-hidden');
+            document.getElementById('password-screen').classList.add('screen-hidden');
+            document.getElementById('greeting-screen').classList.add('screen-hidden');
+            document.getElementById('music-screen').classList.add('screen-hidden');
             currentInput = "";
             updateDisplay();
         }
@@ -653,8 +649,8 @@
         function checkPassword() {
             const passwordBox = document.getElementById('passwordBox');
             if (currentInput === CORRECT_PASSWORD) {
-                document.getElementById('password-screen').classList.add('hidden');
-                document.getElementById('greeting-screen').classList.remove('hidden');
+                document.getElementById('password-screen').classList.add('screen-hidden');
+                document.getElementById('greeting-screen').classList.remove('screen-hidden');
             } else {
                 passwordBox.classList.add('shake');
                 setTimeout(() => {
@@ -666,8 +662,8 @@
         }
 
         function goToMusicPage() {
-            document.getElementById('greeting-screen').classList.add('hidden');
-            document.getElementById('music-screen').classList.remove('hidden');
+            document.getElementById('greeting-screen').classList.add('screen-hidden');
+            document.getElementById('music-screen').classList.remove('screen-hidden');
             playAudio();
         }
 
