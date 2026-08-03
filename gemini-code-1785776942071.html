@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gift For You</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #faebef; /* สีสำรองกรณีภาพยังไม่โหลด */
+        }
+
+        /* --- หน้าแรก (PAGE 1): ใช้ภาพ 44.png เป็นพื้นหลังตรงปก 100% --- */
+        #page1 {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            
+            /* นำภาพ 44.png มาเป็นพื้นหลังหลัก */
+            background-image: url('44.png');
+            background-size: contain;      /* ปรับภาพให้พอดีหน้าจอโดยไม่เสียสัดส่วน */
+            background-repeat: no-repeat;
+            background-position: center;
+            
+            position: relative;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        /* ปุ่มกด OPEN ที่สร้างทับตำแหน่งปุ่มในรูปภาพ */
+        .btn-open-overlay {
+            position: absolute;
+            bottom: 12%; /* ปรับระยะความสูงให้อยู่ตรงปุ่ม OPEN ในภาพพอดี */
+            width: 220px;
+            height: 55px;
+            border-radius: 30px;
+            background: transparent; /* โปร่งใสเพื่อให้เห็นปุ่มเดิมในภาพ */
+            border: none;
+            cursor: pointer;
+            outline: none;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        /* เอฟเฟกต์เมื่อเอาเมาส์ชี้ปุ่ม */
+        .btn-open-overlay:hover {
+            transform: scale(1.05);
+            background-color: rgba(255, 255, 255, 0.15); /* สว่างขึ้นเล็กน้อย */
+            box-shadow: 0 0 15px rgba(220, 150, 170, 0.4);
+        }
+
+        .btn-open-overlay:active {
+            transform: scale(0.95);
+        }
+
+        /* --- หน้าถัดไป (PAGE 2) --- */
+        #page2 {
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            opacity: 0;
+            justify-content: center;
+            align-items: center;
+            
+            /* ใช้ภาพพื้นหลังเดียวกันแต่จางลงเล็กน้อย */
+            background-image: url('44.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            transform: scale(0.95);
+        }
+
+        /* การ์ดเนื้อหาหน้าสอง */
+        .card-content {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            border: 2px solid #f2bdc9;
+            border-radius: 24px;
+            padding: 40px 30px;
+            max-width: 450px;
+            width: 85vw;
+            text-align: center;
+            color: #4a2128;
+            box-shadow: 0 12px 30px rgba(220, 140, 165, 0.3);
+            z-index: 10;
+        }
+
+        .card-content h2 {
+            font-size: 1.8rem;
+            color: #d1496b;
+            margin-bottom: 12px;
+        }
+
+        .card-content p {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #61353e;
+            margin-bottom: 25px;
+        }
+
+        .btn-back {
+            background-color: transparent;
+            color: #4a2128;
+            border: 1px solid #4a2128;
+            border-radius: 20px;
+            padding: 8px 24px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-back:hover {
+            background-color: rgba(74, 33, 40, 0.08);
+        }
+
+        /* Transition Classes */
+        .fade-out {
+            opacity: 0 !important;
+            transform: scale(0.95) !important;
+            pointer-events: none;
+        }
+
+        .fade-in {
+            display: flex !important;
+            opacity: 1 !important;
+            transform: scale(1) !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= หน้าแรก (PAGE 1) ================= -->
+    <div id="page1">
+        <!-- ปุ่มโปร่งใสสำหรับคลิกตรงตำแหน่ง OPEN บนภาพ -->
+        <button class="btn-open-overlay" onclick="openPage2()" title="Click to Open"></button>
+    </div>
+
+    <!-- ================= หน้าถัดไป (PAGE 2) ================= -->
+    <div id="page2">
+        <div class="card-content">
+            <h2>🎁 ยินดีด้วย! 🎁</h2>
+            <p>
+                คุณได้เปิดของขวัญเรียบร้อยแล้ว<br>
+                สามารถแก้ไขข้อความหรือใส่รูปภาพความทรงจำในส่วนนี้ได้ตามต้องการครับ
+            </p>
+            <button class="btn-back" onclick="backToPage1()">ย้อนกลับ</button>
+        </div>
+    </div>
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script>
+        function openPage2() {
+            const page1 = document.getElementById('page1');
+            const page2 = document.getElementById('page2');
+
+            page1.classList.add('fade-out');
+
+            setTimeout(() => {
+                page1.style.display = 'none';
+                page2.classList.add('fade-in');
+            }, 500);
+        }
+
+        function backToPage1() {
+            const page1 = document.getElementById('page1');
+            const page2 = document.getElementById('page2');
+
+            page2.classList.remove('fade-in');
+
+            setTimeout(() => {
+                page2.style.display = 'none';
+                page1.style.display = 'flex';
+                void page1.offsetWidth; // Trigger Reflow
+                page1.classList.remove('fade-out');
+            }, 400);
+        }
+    </script>
+</body>
+</html>
