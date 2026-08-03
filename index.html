@@ -67,7 +67,7 @@
         }
 
         /* ----------------------------------
-           หน้า 2: หน้าใส่รหัสผ่าน
+           หน้า 2: หน้าใส่รหัสผ่าน (ใช้พื้นหลัง 363.png)
         ---------------------------------- */
         #password-screen {
             position: fixed;
@@ -178,7 +178,7 @@
         }
 
         /* ----------------------------------
-           หน้า 3: หน้าแสดงคำอวยพร
+           หน้า 3: หน้าแสดงคำอวยพร (ใช้พื้นหลัง 363.png)
         ---------------------------------- */
         #greeting-screen {
             position: fixed;
@@ -262,7 +262,7 @@
         }
 
         /* ----------------------------------
-           หน้า 4: หน้าฟังเพลง (ปรับขยายขนาดตัวเล่นเพลงขึ้น)
+           หน้า 4: หน้าฟังเพลง (ใช้พื้นหลัง 363.png)
         ---------------------------------- */
         #music-screen {
             position: fixed;
@@ -277,30 +277,30 @@
             z-index: 666;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: center; /* จัดให้อยู่กึ่งกลางหน้าจอ */
         }
 
-        /* คอนเทนเนอร์เครื่องเล่นเพลง (ขยายความกว้างและสูงขึ้น) */
+        /* คอนเทนเนอร์เครื่องเล่นเพลง */
         .player-container {
             position: relative;
-            width: 540px; /* ปรับเพิ่มจาก 440px */
-            height: 400px; /* ปรับเพิ่มจาก 320px */
+            width: 440px;
+            height: 320px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* แผ่นเสียง (Vinyl) (ขยายขนาดเป็น 340px) */
+        /* แผ่นเสียง (Vinyl) */
         .vinyl-record {
             position: absolute;
             left: 0px;
             top: 50%;
             transform: translateY(-50%);
-            width: 340px; /* ปรับเพิ่มจาก 270px */
-            height: 340px; /* ปรับเพิ่มจาก 270px */
+            width: 270px;
+            height: 270px;
             border-radius: 50%;
             background: radial-gradient(circle, #3a2e2b 0%, #111111 25%, #2b2b2b 28%, #000000 70%);
-            box-shadow: -8px 12px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: -5px 8px 20px rgba(0, 0, 0, 0.25);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -311,25 +311,25 @@
         .vinyl-record::before {
             content: '';
             position: absolute;
-            width: 315px;
-            height: 315px;
+            width: 250px;
+            height: 250px;
             border-radius: 50%;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* ฉลากกลางแผ่นเสียง */
+        /* ฉลากแผ่นเสียง */
         .vinyl-label {
-            width: 110px; /* ปรับเพิ่มจาก 90px */
-            height: 110px; /* ปรับเพิ่มจาก 90px */
+            width: 90px;
+            height: 90px;
             background-color: #EFA2B4;
             border-radius: 50%;
-            border: 4px solid #fff;
+            border: 3px solid #fff;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             color: #5C2533;
-            font-size: 10px;
+            font-size: 8px;
             font-weight: 700;
             text-align: center;
             padding: 5px;
@@ -339,31 +339,31 @@
             100% { transform: translateY(-50%) rotate(360deg); }
         }
 
-        /* การ์ดเครื่องเล่นเพลง (ขยายกว้างเป็น 310px) */
+        /* การ์ดเครื่องเล่นเพลง */
         .music-player-card {
             position: absolute;
             right: 0px;
             top: 50%;
             transform: translateY(-50%);
-            width: 310px; /* ปรับเพิ่มจาก 260px */
+            width: 260px;
             background-color: #E8C3CC;
-            border-radius: 24px;
-            padding: 18px;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+            border-radius: 20px;
+            padding: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
             z-index: 2;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* กรอบใส่รูปคู่ */
+        /* กรอบรูปคู่ */
         .photo-frame {
             width: 100%;
-            height: 220px; /* ปรับเพิ่มจาก 190px */
-            border-radius: 16px;
+            height: 190px;
+            border-radius: 12px;
             overflow: hidden;
             background-color: #fff;
-            border: 4px solid #fff;
+            border: 3px solid #fff;
         }
 
         .photo-frame img {
@@ -375,12 +375,12 @@
         /* แถบเล่นเพลง (Progress Bar) */
         .progress-container {
             width: 100%;
-            margin-top: 15px;
+            margin-top: 12px;
         }
 
         .progress-bar-bg {
             width: 100%;
-            height: 6px;
+            height: 5px;
             background-color: #D1A3B0;
             border-radius: 10px;
             position: relative;
@@ -398,10 +398,10 @@
         .progress-bar-fill::after {
             content: '';
             position: absolute;
-            right: -5px;
-            top: -4px;
-            width: 14px;
-            height: 14px;
+            right: -4px;
+            top: -3.5px;
+            width: 12px;
+            height: 12px;
             background-color: #5C2533;
             border-radius: 50%;
         }
@@ -409,10 +409,10 @@
         .time-stamps {
             display: flex;
             justify-content: space-between;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             color: #5C2533;
-            margin-top: 6px;
+            margin-top: 4px;
         }
 
         /* ปุ่มควบคุม */
@@ -421,7 +421,7 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            margin-top: 10px;
+            margin-top: 8px;
             padding: 0 5px;
         }
 
@@ -429,7 +429,7 @@
             background: none;
             border: none;
             color: #5C2533;
-            font-size: 18px; /* เพิ่มขนาดไอคอนปุ่ม */
+            font-size: 16px;
             cursor: pointer;
             transition: transform 0.1s ease;
         }
@@ -439,7 +439,7 @@
         }
 
         .play-pause-btn {
-            font-size: 24px;
+            font-size: 22px;
         }
 
         .fade-out {
@@ -509,7 +509,7 @@
             <div class="vinyl-record" id="vinyl">
                 <div class="vinyl-label">
                     <span>OUR SONG</span>
-                    <span style="font-size: 8px; margin-top: 3px;">THE ART OF LOVING</span>
+                    <span style="font-size: 6px; margin-top: 2px;">THE ART OF LOVING</span>
                 </div>
             </div>
 
