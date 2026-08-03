@@ -3,190 +3,627 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gift For You</title>
+    <title>Happy 1st Anniversary</title>
+    <!-- นำเข้าฟอนต์ Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Mali:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;800&display=swap');
-
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Kanit', sans-serif;
+            box-sizing: border-box;
+            font-family: 'Mali', 'Fredoka', cursive, sans-serif;
+            user-select: none;
         }
 
         body, html {
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background-color: #faebef; /* สีสำรองกรณีภาพยังไม่โหลด */
+            background-color: #fdf0f4;
         }
 
-        /* --- หน้าแรก (PAGE 1): ใช้ภาพ 44.png เป็นพื้นหลังตรงปก 100% --- */
-        #page1 {
+        /* ----------------------------------
+           หน้า 1: หน้าแรก (Landing Page)
+        ---------------------------------- */
+        #welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100vw;
             height: 100vh;
+            background-image: url('663.png'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 999;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+            display: flex;
+            justify-content: center;
+        }
+
+        .open-btn {
+            position: absolute;
+            bottom: 5%; 
+            left: 50%;                  
+            transform: translateX(-50%); 
+            padding: 12px 48px;
+            font-size: 24px;
+            font-weight: 700;
+            color: #4A1525;
+            background-color: #E2B5BD;
+            border: 3px solid #4A1525;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            letter-spacing: 2px;
+            white-space: nowrap;
+        }
+
+        .open-btn:hover {
+            transform: translateX(-50%) scale(1.08); 
+            background-color: #D89EA9;
+        }
+
+        /* ----------------------------------
+           หน้า 2: หน้าใส่รหัสผ่าน
+        ---------------------------------- */
+        #password-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('363.png'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 888;
             display: flex;
             flex-direction: column;
-            justify-content: flex-end;
-            align-items: center;
-            
-            /* นำภาพ 44.png มาเป็นพื้นหลังหลัก */
-            background-image: url('44.png');
-            background-size: contain;      /* ปรับภาพให้พอดีหน้าจอโดยไม่เสียสัดส่วน */
-            background-repeat: no-repeat;
-            background-position: center;
-            
-            position: relative;
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        /* ปุ่มกด OPEN ที่สร้างทับตำแหน่งปุ่มในรูปภาพ */
-        .btn-open-overlay {
-            position: absolute;
-            bottom: 12%; /* ปรับระยะความสูงให้อยู่ตรงปุ่ม OPEN ในภาพพอดี */
-            width: 220px;
-            height: 55px;
-            border-radius: 30px;
-            background: transparent; /* โปร่งใสเพื่อให้เห็นปุ่มเดิมในภาพ */
-            border: none;
-            cursor: pointer;
-            outline: none;
-            transition: transform 0.2s ease, background-color 0.2s ease;
-        }
-
-        /* เอฟเฟกต์เมื่อเอาเมาส์ชี้ปุ่ม */
-        .btn-open-overlay:hover {
-            transform: scale(1.05);
-            background-color: rgba(255, 255, 255, 0.15); /* สว่างขึ้นเล็กน้อย */
-            box-shadow: 0 0 15px rgba(220, 150, 170, 0.4);
-        }
-
-        .btn-open-overlay:active {
-            transform: scale(0.95);
-        }
-
-        /* --- หน้าถัดไป (PAGE 2) --- */
-        #page2 {
-            width: 100vw;
-            height: 100vh;
-            display: none;
-            opacity: 0;
             justify-content: center;
             align-items: center;
-            
-            /* ใช้ภาพพื้นหลังเดียวกันแต่จางลงเล็กน้อย */
-            background-image: url('44.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            
-            transition: opacity 0.6s ease, transform 0.6s ease;
-            transform: scale(0.95);
+            transition: opacity 0.8s ease, visibility 0.8s ease;
         }
 
-        /* การ์ดเนื้อหาหน้าสอง */
-        .card-content {
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(10px);
-            border: 2px solid #f2bdc9;
-            border-radius: 24px;
-            padding: 40px 30px;
-            max-width: 450px;
-            width: 85vw;
-            text-align: center;
-            color: #4a2128;
-            box-shadow: 0 12px 30px rgba(220, 140, 165, 0.3);
-            z-index: 10;
-        }
-
-        .card-content h2 {
-            font-size: 1.8rem;
-            color: #d1496b;
-            margin-bottom: 12px;
-        }
-
-        .card-content p {
-            font-size: 1.05rem;
-            line-height: 1.6;
-            color: #61353e;
+        .password-display-box {
+            width: 320px;
+            height: 54px;
+            background-color: rgba(255, 255, 255, 0.85);
+            border: 3px solid #4A1525;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
             margin-bottom: 25px;
+            backdrop-filter: blur(5px);
+            position: relative;
         }
 
-        .btn-back {
-            background-color: transparent;
-            color: #4a2128;
-            border: 1px solid #4a2128;
+        .password-text-area {
+            font-size: 20px;
+            font-weight: 600;
+            color: #4A1525;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-grow: 1;
+        }
+
+        .dot {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            background-color: #4A1525;
+            border-radius: 50%;
+            animation: popIn 0.2s ease-out;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+
+        .lock-icon {
+            width: 22px;
+            height: 22px;
+            fill: #4A1525;
+            position: absolute;
+            right: 20px;
+        }
+
+        .keypad-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 80px);
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .key-btn {
+            width: 80px;
+            height: 52px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 3px solid #4A1525;
             border-radius: 20px;
-            padding: 8px 24px;
-            font-size: 0.95rem;
+            font-size: 22px;
+            font-weight: 700;
+            color: #4A1525;
             cursor: pointer;
-            transition: background 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.15s ease;
         }
 
-        .btn-back:hover {
-            background-color: rgba(74, 33, 40, 0.08);
+        .key-btn:hover {
+            background-color: #fce4eb;
+            transform: translateY(-2px);
         }
 
-        /* Transition Classes */
+        .col-2 { grid-column: 2; }
+        .col-3 { grid-column: 3; }
+
+        .shake {
+            animation: shake 0.4s ease-in-out;
+            border-color: #D9534F !important;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-10px); }
+            40%, 80% { transform: translateX(10px); }
+        }
+
+        /* ----------------------------------
+           หน้า 3: หน้าแสดงคำอวยพร
+        ---------------------------------- */
+        #greeting-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('363.png'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 777;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .anniversary-card {
+            width: 100%;
+            max-width: 650px;
+            background-color: rgba(228, 203, 206, 0.92);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(74, 21, 37, 0.15);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(3px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+            background-color: rgba(215, 186, 190, 0.95);
+            border-bottom: 1px solid rgba(74, 21, 37, 0.1);
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #4A1525;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            font-size: 22px;
+            color: #4A1525;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .card-body {
+            padding: 30px 35px;
+            color: #4A1525;
+            line-height: 1.8;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .next-page-btn {
+            align-self: center;
+            margin-top: 20px;
+            padding: 10px 24px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #4A1525;
+            background-color: #E2B5BD;
+            border: 2px solid #4A1525;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .next-page-btn:hover {
+            background-color: #D89EA9;
+            transform: scale(1.05);
+        }
+
+        /* ----------------------------------
+           หน้า 4: หน้าฟังเพลง (ปรับขยายขนาดตัวเล่นเพลงขึ้น)
+        ---------------------------------- */
+        #music-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('363.png'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 666;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* คอนเทนเนอร์เครื่องเล่นเพลง (ขยายความกว้างและสูงขึ้น) */
+        .player-container {
+            position: relative;
+            width: 540px; /* ปรับเพิ่มจาก 440px */
+            height: 400px; /* ปรับเพิ่มจาก 320px */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* แผ่นเสียง (Vinyl) (ขยายขนาดเป็น 340px) */
+        .vinyl-record {
+            position: absolute;
+            left: 0px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 340px; /* ปรับเพิ่มจาก 270px */
+            height: 340px; /* ปรับเพิ่มจาก 270px */
+            border-radius: 50%;
+            background: radial-gradient(circle, #3a2e2b 0%, #111111 25%, #2b2b2b 28%, #000000 70%);
+            box-shadow: -8px 12px 25px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: spin 10s linear infinite;
+            z-index: 1;
+        }
+
+        .vinyl-record::before {
+            content: '';
+            position: absolute;
+            width: 315px;
+            height: 315px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* ฉลากกลางแผ่นเสียง */
+        .vinyl-label {
+            width: 110px; /* ปรับเพิ่มจาก 90px */
+            height: 110px; /* ปรับเพิ่มจาก 90px */
+            background-color: #EFA2B4;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #5C2533;
+            font-size: 10px;
+            font-weight: 700;
+            text-align: center;
+            padding: 5px;
+        }
+
+        @keyframes spin {
+            100% { transform: translateY(-50%) rotate(360deg); }
+        }
+
+        /* การ์ดเครื่องเล่นเพลง (ขยายกว้างเป็น 310px) */
+        .music-player-card {
+            position: absolute;
+            right: 0px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 310px; /* ปรับเพิ่มจาก 260px */
+            background-color: #E8C3CC;
+            border-radius: 24px;
+            padding: 18px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* กรอบใส่รูปคู่ */
+        .photo-frame {
+            width: 100%;
+            height: 220px; /* ปรับเพิ่มจาก 190px */
+            border-radius: 16px;
+            overflow: hidden;
+            background-color: #fff;
+            border: 4px solid #fff;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* แถบเล่นเพลง (Progress Bar) */
+        .progress-container {
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 6px;
+            background-color: #D1A3B0;
+            border-radius: 10px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .progress-bar-fill {
+            width: 25%;
+            height: 100%;
+            background-color: #5C2533;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .progress-bar-fill::after {
+            content: '';
+            position: absolute;
+            right: -5px;
+            top: -4px;
+            width: 14px;
+            height: 14px;
+            background-color: #5C2533;
+            border-radius: 50%;
+        }
+
+        .time-stamps {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: 600;
+            color: #5C2533;
+            margin-top: 6px;
+        }
+
+        /* ปุ่มควบคุม */
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-top: 10px;
+            padding: 0 5px;
+        }
+
+        .ctrl-btn {
+            background: none;
+            border: none;
+            color: #5C2533;
+            font-size: 18px; /* เพิ่มขนาดไอคอนปุ่ม */
+            cursor: pointer;
+            transition: transform 0.1s ease;
+        }
+
+        .ctrl-btn:hover {
+            transform: scale(1.2);
+        }
+
+        .play-pause-btn {
+            font-size: 24px;
+        }
+
         .fade-out {
-            opacity: 0 !important;
-            transform: scale(0.95) !important;
+            opacity: 0;
+            visibility: hidden;
             pointer-events: none;
-        }
-
-        .fade-in {
-            display: flex !important;
-            opacity: 1 !important;
-            transform: scale(1) !important;
         }
     </style>
 </head>
 <body>
 
-    <!-- ================= หน้าแรก (PAGE 1) ================= -->
-    <div id="page1">
-        <!-- ปุ่มโปร่งใสสำหรับคลิกตรงตำแหน่ง OPEN บนภาพ -->
-        <button class="btn-open-overlay" onclick="openPage2()" title="Click to Open"></button>
+    <!-- 1. หน้าแรก -->
+    <div id="welcome-screen">
+        <button class="open-btn" onclick="goToPasswordPage()">OPEN</button>
     </div>
 
-    <!-- ================= หน้าถัดไป (PAGE 2) ================= -->
-    <div id="page2">
-        <div class="card-content">
-            <h2>🎁 ยินดีด้วย! 🎁</h2>
-            <p>
-                คุณได้เปิดของขวัญเรียบร้อยแล้ว<br>
-                สามารถแก้ไขข้อความหรือใส่รูปภาพความทรงจำในส่วนนี้ได้ตามต้องการครับ
-            </p>
-            <button class="btn-back" onclick="backToPage1()">ย้อนกลับ</button>
+    <!-- 2. หน้าใส่รหัสผ่าน -->
+    <div id="password-screen">
+        <div class="password-display-box" id="passwordBox">
+            <div class="password-text-area" id="passDisplay">
+                Enter Our Password
+            </div>
+            <svg class="lock-icon" viewBox="0 0 24 24">
+                <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+            </svg>
+        </div>
+
+        <div class="keypad-grid">
+            <button class="key-btn" onclick="pressKey('1')">1</button>
+            <button class="key-btn" onclick="pressKey('2')">2</button>
+            <button class="key-btn" onclick="pressKey('3')">3</button>
+            <button class="key-btn" onclick="pressKey('4')">4</button>
+            <button class="key-btn" onclick="pressKey('5')">5</button>
+            <button class="key-btn" onclick="pressKey('6')">6</button>
+            <button class="key-btn" onclick="pressKey('7')">7</button>
+            <button class="key-btn" onclick="pressKey('8')">8</button>
+            <button class="key-btn" onclick="pressKey('9')">9</button>
+            
+            <button class="key-btn col-2" onclick="pressKey('0')">0</button>
+            <button class="key-btn col-3" onclick="deleteKey()">⌫</button>
         </div>
     </div>
 
-    <!-- ================= JAVASCRIPT ================= -->
+    <!-- 3. หน้าแสดงคำอวยพร -->
+    <div id="greeting-screen">
+        <div class="anniversary-card">
+            <div class="card-header">
+                <button class="nav-btn" onclick="backToPassword()">←</button>
+                <div class="header-title">Happy 1st Anniversary 🫶</div>
+                <button class="nav-btn" onclick="backToPassword()">✕</button>
+            </div>
+
+            <div class="card-body">
+                <p>สุขสันต์วันครบรอบ 1 ปีนะ ขอบคุณที่เข้ามาเป็นส่วนหนึ่งของชีวิต และอยู่เคียงข้างกันตลอดที่ผ่านมา ขอให้เราจับมือกันแบบนี้ไปเรื่อย ๆ นะคะ 🤍</p>
+                <div style="text-align: center;">
+                    <button class="next-page-btn" onclick="goToMusicPage()">ไปฟังเพลงกัน 🎵</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. หน้าฟังเพลง -->
+    <div id="music-screen">
+        <div class="player-container">
+            
+            <!-- แผ่นเสียง -->
+            <div class="vinyl-record" id="vinyl">
+                <div class="vinyl-label">
+                    <span>OUR SONG</span>
+                    <span style="font-size: 8px; margin-top: 3px;">THE ART OF LOVING</span>
+                </div>
+            </div>
+
+            <!-- การ์ดเครื่องเล่นเพลง -->
+            <div class="music-player-card">
+                <!-- รูปคู่ -->
+                <div class="photo-frame">
+                    <img src="couple.jpg" alt="Couple Picture" id="coupleImg">
+                </div>
+
+                <!-- แถบเวลา -->
+                <div class="progress-container">
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" id="progressFill"></div>
+                    </div>
+                    <div class="time-stamps">
+                        <span id="currentTime">0:35</span>
+                        <span id="duration">-2:50</span>
+                    </div>
+                </div>
+
+                <!-- ปุ่มควบคุมเพลง -->
+                <div class="controls">
+                    <button class="ctrl-btn">🔀</button>
+                    <button class="ctrl-btn">⏮</button>
+                    <button class="ctrl-btn play-pause-btn" onclick="togglePlay()">❚❚</button>
+                    <button class="ctrl-btn">⏭</button>
+                    <button class="ctrl-btn">🔁</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- แท็กเพลง HTML Audio -->
+        <audio id="myAudio" loop>
+            <!-- ลิงก์เพลง ใส่ลิงก์ MP3 ตรงนี้ -->
+            <source src=" ลิงก์เพลง " type="audio/mpeg">
+        </audio>
+    </div>
+
     <script>
-        function openPage2() {
-            const page1 = document.getElementById('page1');
-            const page2 = document.getElementById('page2');
+        const CORRECT_PASSWORD = "1234"; 
+        let currentInput = "";
+        const audio = document.getElementById('myAudio');
+        const vinyl = document.getElementById('vinyl');
 
-            page1.classList.add('fade-out');
-
-            setTimeout(() => {
-                page1.style.display = 'none';
-                page2.classList.add('fade-in');
-            }, 500);
+        function goToPasswordPage() {
+            document.getElementById('welcome-screen').classList.add('fade-out');
         }
 
-        function backToPage1() {
-            const page1 = document.getElementById('page1');
-            const page2 = document.getElementById('page2');
+        function pressKey(num) {
+            if (currentInput.length < 4) {
+                currentInput += num;
+                updateDisplay();
 
-            page2.classList.remove('fade-in');
+                if (currentInput.length === 4) {
+                    setTimeout(checkPassword, 200);
+                }
+            }
+        }
 
-            setTimeout(() => {
-                page2.style.display = 'none';
-                page1.style.display = 'flex';
-                void page1.offsetWidth; // Trigger Reflow
-                page1.classList.remove('fade-out');
-            }, 400);
+        function deleteKey() {
+            if (currentInput.length > 0) {
+                currentInput = currentInput.slice(0, -1);
+                updateDisplay();
+            }
+        }
+
+        function updateDisplay() {
+            const displayArea = document.getElementById('passDisplay');
+            if (currentInput.length === 0) {
+                displayArea.innerHTML = 'Enter Our Password';
+            } else {
+                let dotsHtml = '';
+                for (let i = 0; i < currentInput.length; i++) {
+                    dotsHtml += '<span class="dot"></span>';
+                }
+                displayArea.innerHTML = dotsHtml;
+            }
+        }
+
+        function checkPassword() {
+            const passwordBox = document.getElementById('passwordBox');
+            if (currentInput === CORRECT_PASSWORD) {
+                document.getElementById('password-screen').classList.add('fade-out');
+            } else {
+                passwordBox.classList.add('shake');
+                setTimeout(() => {
+                    passwordBox.classList.remove('shake');
+                    currentInput = "";
+                    updateDisplay();
+                }, 500);
+            }
+        }
+
+        function backToPassword() {
+            currentInput = "";
+            updateDisplay();
+            document.getElementById('password-screen').classList.remove('fade-out');
+        }
+
+        function goToMusicPage() {
+            document.getElementById('greeting-screen').classList.add('fade-out');
+            audio.play().catch(e => console.log("Autoplay blocked:", e));
+        }
+
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play();
+                vinyl.style.animationPlayState = 'running';
+            } else {
+                audio.pause();
+                vinyl.style.animationPlayState = 'paused';
+            }
         }
     </script>
 </body>
