@@ -518,9 +518,21 @@
                 <div class="photo-frame">
                     <img src="Rabbit" alt="Couple Picture" id="coupleImg">
                 </div>
+                
+            <div class="progress-container">
+                    <div class="progress-bar-bg" id="progressBarBg">
+                        <div class="progress-bar-fill" id="progressFill"></div>
+                    </div>
+                    <div class="time-stamps">
+                        <span id="currentTime">0:00</span>
+                        <span id="duration">0:00</span>
+                    </div>
+                </div>
 
                 <div class="controls">
-                    <button class="ctrl-btn play-pause-btn" id="playPauseBtn" onclick="togglePlay()">❚❚</button>
+                    <button class="ctrl-btn" onclick="restartAudio()">⏮</button>
+                    <button class="ctrl-btn play-pause-btn" id="playPauseBtn" onclick="togglePlay()">▶</button>
+                    <button class="ctrl-btn">⏭</button>
                 </div>
             </div>
         </div>
@@ -616,7 +628,7 @@
             document.getElementById('music-screen').classList.remove('screen-hidden');
             
             if (!isMusicLoaded) {
-                ytPlayer.src = "https://www.youtube.com/embed/3mYVyVY-lU4?enablejsapi=1&autoplay=1&loop=1&playlist=3mYVyVY-lU4";
+                ytPlayer.src = "https://www.tiktok.com/@tida_pp/video/7585975334374329620?is_from_webapp=1&sender_device=pc";
                 isMusicLoaded = true;
             } else {
                 ytPlayer.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
